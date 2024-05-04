@@ -249,7 +249,7 @@ public class CheeseOptions {
             addCard(new Rage().makeCopy());
             addCard(new Rage().makeCopy());
 
-            addRelic(new TopMask().makeCopy());
+//            addRelic(new TopMask().makeCopy());
             removeRelic(new UnceasingTop().makeCopy());
         }, true));
 

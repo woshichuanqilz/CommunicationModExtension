@@ -29,10 +29,7 @@ import ludicrousspeed.Controller;
 import twitch.QueryController;
 import twitch.TwitchController;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -43,7 +40,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 @SpireInitializer
 public class CommunicationModExtension implements PostInitializeSubscriber {
-    public static CommunicationMethod communicationMethod = CommunicationMethod.TWITCH_CHAT;
+    public static CommunicationMethod communicationMethod = CommunicationMethod.SOCKET;
     private static final int PORT = 8080;
 
     enum CommunicationMethod {
@@ -81,19 +78,22 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
             try {
                 // start stuff then start read thread and write thread
                 ServerSocket serverSocket = new ServerSocket(PORT);
+                System.out.println("socket service start...");
 
-                Socket socket = serverSocket.accept();
+                Socket client_socket = serverSocket.accept();
 
                 Thread writeThread = new Thread(() -> {
                     try {
-                        DataOutputStream out = new DataOutputStream(socket
-                                .getOutputStream());
+                        DataOutputStream out = new DataOutputStream(client_socket.getOutputStream());
+//                        PrintWriter out = new PrintWriter(client_socket.getOutputStream(), true);
 
                         CommunicationMod.subscribe(() -> {
+                            System.out.println("sending socket" + GameStateConverter.getCommunicationState());
+//                            out.println(GameStateConverter.getCommunicationState());
                             try {
-                                out.writeUTF(GameStateConverter.getCommunicationState());
+                                out.writeUTF(GameStateConverter.getCommunicationState() + "\n");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                throw new RuntimeException(e);
                             }
                         });
                     } catch (IOException e) {
@@ -104,17 +104,26 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
 
                 Thread readThread = new Thread(() -> {
                     try {
-                        DataInputStream in = new DataInputStream(new BufferedInputStream(socket
-                                .getInputStream()));
-
+//                        DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                        BufferedReader in = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
                         while (true) {
-                            CommunicationMod.queueCommand(in.readUTF());
+                            try {
+                                String s = in.readLine();
+                                System.out.println("recv message: "+ s);
+                                CommunicationMod.queueCommand(s);
+                            } catch (EOFException eofe) {
+                                System.out.println("End of file reached");
+                                break;
+                            } catch (IOException ioe) {
+                                ioe.printStackTrace();
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
                 readThread.start();
+                System.out.println("reading thread start socket...");
 
             } catch (IOException e) {
                 e.printStackTrace();

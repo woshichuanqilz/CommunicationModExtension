@@ -1,6 +1,6 @@
 package twitch.votecontrollers;
 
-import FightPredictor.FightPredictor;
+//import FightPredictor.FightPredictor;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import chronoMods.coop.CoopCourierRoom;
@@ -207,15 +207,15 @@ public class CardRewardVoteController extends VoteController {
                         AbstractCard card = messageToCardReward.get(message);
                         System.out.println("trying to match " + card);
 
-                        System.out.println(FightPredictor.percentiles.get(card.name));
-
-                        if (FightPredictor.percentiles.containsKey(card.name)) {
-                            int percentile = FightPredictor.percentiles.get(card.name);
-                            if (percentile > bestPercentile) {
-                                bestFound = i;
-                                bestPercentile = percentile;
-                            }
-                        }
+//                        System.out.println(FightPredictor.percentiles.get(card.name));
+//
+//                        if (FightPredictor.percentiles.containsKey(card.name)) {
+//                            int percentile = FightPredictor.percentiles.get(card.name);
+//                            if (percentile > bestPercentile) {
+//                                bestFound = i;
+//                                bestPercentile = percentile;
+//                            }
+//                        }
 
                     }
                 }

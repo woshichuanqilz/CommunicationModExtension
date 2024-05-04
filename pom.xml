@@ -14,6 +14,8 @@
         <SlayTheSpire.version>12-22-2020</SlayTheSpire.version>
         <ModTheSpire.version>3.18.1</ModTheSpire.version>
         <BaseMod.version>5.32.0</BaseMod.version>
+        <ModPath>${user.home}/.local/share/Steam/steamapps/workshop/content/646570</ModPath>
+        <GamePath>${user.home}/.local/share/Steam/steamapps/common/SlayTheSpire</GamePath>
     </properties>
 
     <dependencies>
@@ -22,159 +24,159 @@
             <artifactId>slaythespire</artifactId>
             <version>${SlayTheSpire.version}</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../lib/desktop-1.0.jar</systemPath>
+            <systemPath>${GamePath}/desktop-1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>basemod</groupId>
             <artifactId>BaseMod-root</artifactId>
             <version>${BaseMod.version}</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/BaseMod.jar</systemPath>
+            <systemPath>${ModPath}/1605833019/BaseMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.evacipated.cardcrawl</groupId>
             <artifactId>ModTheSpire</artifactId>
             <version>${ModTheSpire.version}</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../lib/ModTheSpire.jar</systemPath>
+            <systemPath>${ModPath}/1605060445/ModTheSpire.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>LudicrousSpeed</groupId>
             <artifactId>LudicrousSpeed</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/LudicrousSpeed.jar</systemPath>
+            <systemPath>${ModPath}/2848749218/LudicrousSpeed.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>savestatemod</groupId>
-            <artifactId>savestatemod</artifactId>
+            <groupId>SaveStateMod</groupId>
+            <artifactId>SaveStateMod</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/SaveStateMod.jar</systemPath>
+            <systemPath>${ModPath}/2489671162/SaveStateMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>BattleAiMod</groupId>
             <artifactId>BattleAiMod</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/BattleAiMod.jar</systemPath>
+            <systemPath>${ModPath}/2848752403/BattleAiMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>autoplay</groupId>
             <artifactId>CommunicationMod</artifactId>
             <version>1.1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/CommunicationMod.jar</systemPath>
+            <systemPath>${ModPath}/2131373661/CommunicationMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>autoplay</groupId>
             <artifactId>TSSRelics</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/TSSRelics.jar</systemPath>
+            <systemPath>${ModPath}/2743437108/TSSRelics.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>marisa</groupId>
             <artifactId>marisa</artifactId>
             <version>0.15.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/TS05_Marisa.jar</systemPath>
+            <systemPath>${ModPath}/1614104912/TS05_Marisa.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>marisa</groupId>
-            <artifactId>MarisaState</artifactId>
-            <version>0.15.4</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/MarisaState.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>marisa</groupId>-->
+<!--            <artifactId>MarisaState</artifactId>-->
+<!--            <version>0.15.4</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${GamePath}//MarisaState.jar</systemPath>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>hermit</groupId>
             <artifactId>hermit</artifactId>
             <version>1.43</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/Hermit.jar</systemPath>
+            <systemPath>${ModPath}/2137404781/Hermit.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>marisa</groupId>
-            <artifactId>HermitState</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/HermitState.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>marisa</groupId>-->
+<!--            <artifactId>HermitState</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${GamePath}//HermitState.jar</systemPath>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>mintyspire</groupId>
             <artifactId>MintySpire</artifactId>
             <version>2.5.3</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/mintySpire.jar</systemPath>
+            <systemPath>${ModPath}/1812723899/mintySpire.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>theVacant</groupId>
             <artifactId>theVacant</artifactId>
             <version>v0.18.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/theVacant.jar</systemPath>
+            <systemPath>${ModPath}/2139050469/TheVacant.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>thecursedmod</groupId>
             <artifactId>thecursedmod</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/TheCursedMod.jar</systemPath>
+            <systemPath>${ModPath}/1670942227/TheCursedMod.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>UnimportantInfo</groupId>
-            <artifactId>TheAdventurer</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/TheAdventurer.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>autoplay</groupId>
-            <artifactId>AdventurerState</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/AdventurerState.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>UnimportantInfo</groupId>-->
+<!--            <artifactId>TheAdventurer</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${GamePath}//TheAdventurer.jar</systemPath>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>autoplay</groupId>-->
+<!--            <artifactId>AdventurerState</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${GamePath}//AdventurerState.jar</systemPath>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>chronoMods</groupId>
             <artifactId>TogetherManager</artifactId>
             <version>3.1.2</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/Spire with Friends.jar</systemPath>
+            <systemPath>${ModPath}/2395241968/Spire with Friends.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>RobotSpaceExplorer</groupId>
             <artifactId>RobotSpaceExplorer</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/RobotSpaceExplorer.jar</systemPath>
+            <systemPath>${ModPath}/2288691830/RobotSpaceExplorer.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>autoplay</groupId>
-            <artifactId>RobotSpaceExplorerState</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/RobotSpaceExplorerState.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>autoplay</groupId>-->
+<!--            <artifactId>RobotSpaceExplorerState</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${GamePath}//RobotSpaceExplorerState.jar</systemPath>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.evacipated.cardcrawl.mod</groupId>
             <artifactId>StSLib</artifactId>
             <version>1.3.2</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/StSLib.jar</systemPath>
+            <systemPath>${ModPath}/1609158507/StSLib.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>fightpredictor</groupId>
-            <artifactId>FightPredictor</artifactId>
-            <version>1.0.4</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../_ModTheSpire/mods/FightPredictor.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>fightpredictor</groupId>-->
+<!--            <artifactId>FightPredictor</artifactId>-->
+<!--            <version>1.0.4</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/../lib/FightPredictor.jar</systemPath>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -191,7 +193,7 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <copy file="target/${artifactId}.jar" tofile="../_ModTheSpire/mods/${artifactId}.jar"/>
+                                <copy file="target/${artifactId}.jar" tofile="${GamePath}/mods/${project.artifactId}.jar"/>
                             </target>
                         </configuration>
                         <goals>

@@ -22,10 +22,13 @@ public class SampleClient {
 
             new Thread(() -> {
                 try {
+                    System.out.println("wait for input");
                     DataInputStream inStream = new DataInputStream(new BufferedInputStream(socket
                             .getInputStream()));
+                    System.out.println("input get done");
 
                     while(true) {
+                        System.out.println("getting...");
                         System.out.println(inStream.readUTF());
                     }
 

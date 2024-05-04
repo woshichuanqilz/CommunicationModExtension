@@ -26,8 +26,8 @@ import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import hermit.characters.hermit;
-import theFishing.FishingMod;
-import theFishing.TheFishing;
+//import theFishing.FishingMod;
+//import theFishing.TheFishing;
 import theVacant.characters.TheVacant;
 import thecursed.TheCursedMod;
 import thecursed.characters.TheCursedCharacter;
@@ -223,10 +223,10 @@ public class CharacterVoteController extends VoteController {
                     charButton = ImageMaster
                             .loadImage(TheCursedMod.getResourcePath("charSelect/button.png"));
                     break;
-                case "adventurer":
-                    charButton = ImageMaster
-                            .loadImage(FishingMod.makeImagePath("charSelect/charButton.png"));
-                    break;
+//                case "adventurer":
+//                    charButton = ImageMaster
+//                            .loadImage(FishingMod.makeImagePath("charSelect/charButton.png"));
+//                    break;
                 case "robotspaceexplorer":
                     charButton = ImageMaster
                             .loadImage("RobotSpaceExplorerResources/images/charSelect/DefaultCharacterButton.png");
@@ -322,8 +322,8 @@ public class CharacterVoteController extends VoteController {
                 characterOptions.put("vacant", option);
             } else if (BaseMod.hasModID("CursedState:") && option.c instanceof TheCursedCharacter) {
                 characterOptions.put("cursed", option);
-            } else if (BaseMod.hasModID("AdventurerState:") && option.c instanceof TheFishing) {
-                characterOptions.put("adventurer", option);
+//            } else if (BaseMod.hasModID("AdventurerState:") && option.c instanceof TheFishing) {
+//                characterOptions.put("adventurer", option);
             } else if (BaseMod.hasModID("RobotSpaceExplorerState:") && option.c instanceof RobotSpaceExplorer) {
                 characterOptions.put("robotspaceexplorer", option);
             } else {
@@ -375,10 +375,10 @@ public class CharacterVoteController extends VoteController {
                         .loadImage(TheCursedMod.getResourcePath("charSelect/portrait.png")));
             }
 
-            if (BaseMod.hasModID("AdventurerState:")) {
-                characterPortraits.put("adventurer", ImageMaster
-                        .loadImage(FishingMod.makeImagePath("charSelect/charBG.png")));
-            }
+//            if (BaseMod.hasModID("AdventurerState:")) {
+//                characterPortraits.put("adventurer", ImageMaster
+//                        .loadImage(FishingMod.makeImagePath("charSelect/charBG.png")));
+//            }
 
             if (BaseMod.hasModID("RobotSpaceExplorerState:")) {
                 characterPortraits.put("robotspaceexplorer", ImageMaster
