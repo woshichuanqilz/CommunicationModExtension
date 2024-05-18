@@ -186,6 +186,8 @@ public class TwitchController implements PostUpdateSubscriber, PostRenderSubscri
         } catch (ConcurrentModificationException | NullPointerException e) {
             System.err.println("Null pointer caught, clean up this crap");
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -196,7 +198,7 @@ public class TwitchController implements PostUpdateSubscriber, PostRenderSubscri
         }
     }
 
-    public void receiveMessage(TwitchUser user, String message) {
+    public void receiveMessage(TwitchUser user, String message) throws IOException {
         String userName = user.getDisplayName();
         String[] tokens = message.split(" ");
 
@@ -267,7 +269,7 @@ public class TwitchController implements PostUpdateSubscriber, PostRenderSubscri
         }
     }
 
-    public void startVote(String stateMessage) {
+    public void startVote(String stateMessage) throws IOException {
         if (!isActive || inBattle) {
             return;
         }
@@ -824,7 +826,7 @@ public class TwitchController implements PostUpdateSubscriber, PostRenderSubscri
         return forceEndVote || System.currentTimeMillis() > voteEndTimeMillis;
     }
 
-    private void resolveVote() {
+    private void resolveVote() throws IOException {
         inVote = false;
 
         if (AbstractDungeon.floorNum != previousLevel) {

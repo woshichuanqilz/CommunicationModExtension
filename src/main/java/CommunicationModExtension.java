@@ -148,7 +148,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
         });
 
         Runnable task = () -> {
-            if (!isClose[0]) {
+            if (isClose[0]) {
                 System.out.println("Close socket service");
                 executorService.shutdownNow();
                 starterThread.interrupt();
@@ -156,8 +156,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                 setSocketThreads();
             }
         };
-        executorService.schedule(task, 2, TimeUnit.SECONDS);
-        executorService.shutdown();
+        executorService.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
 
         starterThread.start();
     }
@@ -182,12 +181,22 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                 twirk.addIrcListener(new TwirkListener() {
                     @Override
                     public void onPrivMsg(TwitchUser sender, TwitchMessage message) {
-                        controller.receiveMessage(sender, message.getContent());
+                        try {
+                            controller.receiveMessage(sender, message.getContent());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
 
-                CommunicationMod.subscribe(() -> controller
-                        .startVote(GameStateConverter.getCommunicationState()));
+                CommunicationMod.subscribe(() -> {
+                    try {
+                        controller
+                                .startVote(GameStateConverter.getCommunicationState());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
                 twirk.connect();
                 System.err.println("connected as " + username);

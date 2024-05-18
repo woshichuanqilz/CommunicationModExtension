@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.helpers.SeedHelper;
 import communicationmod.CommunicationMod;
 import twitch.votecontrollers.CharacterVoteController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
@@ -37,7 +38,7 @@ public class CommandChoice implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException {
         for (String command : resultCommands) {
             boolean isCharacterVote = voteController != null &&
                     voteController instanceof CharacterVoteController;
