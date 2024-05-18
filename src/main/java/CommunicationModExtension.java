@@ -40,11 +40,27 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import communicationmod.OnStateChangeSubscriber;
 
 @SpireInitializer
 public class CommunicationModExtension implements PostInitializeSubscriber {
+    private class writeSocket implements OnStateChangeSubscriber{
+        @Override
+        public void receiveOnStateChange() {
+            System.out.println("Send Socket:" + GameStateConverter.getCommunicationState());
+            try {
+                out.writeUTF(GameStateConverter.getCommunicationState() + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public static CommunicationMethod communicationMethod = CommunicationMethod.SOCKET;
     private static final int PORT = 8080;
+    private static DataOutputStream out;
+    private static writeSocket writeSocket;
+
 
     enum CommunicationMethod {
         SOCKET,
@@ -88,23 +104,10 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                 System.out.println("socket service start...");
 
                 Socket client_socket = serverSocket.accept();
+                out = new DataOutputStream(client_socket.getOutputStream());
 
                 Thread writeThread = new Thread(() -> {
-                    try {
-                        DataOutputStream out = new DataOutputStream(client_socket.getOutputStream());
-//                        PrintWriter out = new PrintWriter(client_socket.getOutputStream(), true);
-
-                        CommunicationMod.subscribe(() -> {
-                            System.out.println("Send Socket:" + GameStateConverter.getCommunicationState());
-                            try {
-                                out.writeUTF(GameStateConverter.getCommunicationState() + "\n");
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    CommunicationMod.subscribe(CommunicationModExtension.writeSocket);
                 });
                 writeThread.start();
 
