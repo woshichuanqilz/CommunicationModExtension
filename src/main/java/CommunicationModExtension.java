@@ -37,6 +37,9 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @SpireInitializer
 public class CommunicationModExtension implements PostInitializeSubscriber {
@@ -74,6 +77,10 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
     }
 
     private static void setSocketThreads() {
+        final boolean[] isClose = {false};
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+
         Thread starterThread = new Thread(() -> {
             try {
                 // start stuff then start read thread and write thread
@@ -88,8 +95,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
 //                        PrintWriter out = new PrintWriter(client_socket.getOutputStream(), true);
 
                         CommunicationMod.subscribe(() -> {
-                            System.out.println("sending socket" + GameStateConverter.getCommunicationState());
-//                            out.println(GameStateConverter.getCommunicationState());
+                            System.out.println("Send Socket:" + GameStateConverter.getCommunicationState());
                             try {
                                 out.writeUTF(GameStateConverter.getCommunicationState() + "\n");
                             } catch (IOException e) {
@@ -109,7 +115,16 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                         while (true) {
                             try {
                                 String s = in.readLine();
-                                System.out.println("recv message: "+ s);
+                                if (s == null) {
+                                    // close socket and write thread and read thread
+                                    client_socket.close();
+                                    serverSocket.close();
+                                    writeThread.interrupt();
+                                    Thread.currentThread().interrupt();
+                                    isClose[0] = true;
+                                    break;
+                                }
+                                System.out.println("Recv Message: "+ s);
                                 CommunicationMod.queueCommand(s);
                             } catch (EOFException eofe) {
                                 System.out.println("End of file reached");
@@ -124,11 +139,25 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                 });
                 readThread.start();
                 System.out.println("reading thread start socket...");
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // wait for close by using ScheduledExecutorService
+
         });
+
+        Runnable task = () -> {
+            if (!isClose[0]) {
+                System.out.println("Close socket service");
+                executorService.shutdownNow();
+                starterThread.interrupt();
+                isClose[0] = true;
+                setSocketThreads();
+            }
+        };
+        executorService.schedule(task, 2, TimeUnit.SECONDS);
+        executorService.shutdown();
 
         starterThread.start();
     }
