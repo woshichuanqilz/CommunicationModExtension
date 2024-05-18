@@ -44,7 +44,7 @@ import communicationmod.OnStateChangeSubscriber;
 
 @SpireInitializer
 public class CommunicationModExtension implements PostInitializeSubscriber {
-    private class writeSocket implements OnStateChangeSubscriber{
+    private static class writeSocket implements OnStateChangeSubscriber{
         @Override
         public void receiveOnStateChange() {
             System.out.println("Send Socket:" + GameStateConverter.getCommunicationState());
@@ -59,7 +59,6 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
     public static CommunicationMethod communicationMethod = CommunicationMethod.SOCKET;
     private static final int PORT = 8080;
     private static DataOutputStream out;
-    private static writeSocket writeSocket;
 
 
     enum CommunicationMethod {
@@ -95,6 +94,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
     private static void setSocketThreads() {
         final boolean[] isClose = {false};
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        writeSocket writeSocket =  new writeSocket();
 
 
         Thread starterThread = new Thread(() -> {
@@ -107,7 +107,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                 out = new DataOutputStream(client_socket.getOutputStream());
 
                 Thread writeThread = new Thread(() -> {
-                    CommunicationMod.subscribe(CommunicationModExtension.writeSocket);
+                    CommunicationMod.subscribe(writeSocket);
                 });
                 writeThread.start();
 
@@ -125,6 +125,7 @@ public class CommunicationModExtension implements PostInitializeSubscriber {
                                     writeThread.interrupt();
                                     Thread.currentThread().interrupt();
                                     isClose[0] = true;
+                                    CommunicationMod.unsubscribe(writeSocket);
                                     break;
                                 }
                                 System.out.println("Recv Message: "+ s);
